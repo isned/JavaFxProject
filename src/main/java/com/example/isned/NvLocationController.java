@@ -1,10 +1,12 @@
 package com.example.isned;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -16,12 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -33,7 +29,18 @@ public class NvLocationController implements Initializable {
     @FXML
     private Button btnAddClient;
 
+    @FXML
+    private DatePicker DateDeb;
 
+    @FXML
+    private DatePicker DateFin;
+    @FXML
+    private Label txtVehicule;
+    @FXML
+    private Label txtConfirmerLocation;
+
+    @FXML
+    private Label txtClient;
     ArrayList<Vehicule> listVehicules;
 
     ObservableList<Client> clients = FXCollections.observableArrayList();
@@ -65,6 +72,9 @@ public class NvLocationController implements Initializable {
     @FXML
     private TextField txtPrixTotal;
 
+    @FXML
+    private Button actualiserbtn;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -75,14 +85,14 @@ public class NvLocationController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        tvClient.getSelectionModel().selectedItemProperty().addListener((observable) -> {
-//            try {
-//                tvClient.getItems().clear();
-//                SetClients();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(FXMLNvLocationController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        });
+        tvClient.getSelectionModel().selectedItemProperty().addListener((observable) -> {
+            try {
+                tvClient.getItems().clear();
+                SetClients();
+            } catch (SQLException ex) {
+                Logger.getLogger(NvLocationController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     @FXML
@@ -91,6 +101,8 @@ public class NvLocationController implements Initializable {
             if(!test()){//test tableView non selectionné
                 lblAlert.setVisible(true);
                 lblAlert.setText("Il faut selectionner un client et une vehicule");
+
+
             }
             else{//passage au formulaire 2
                 lblAlert.setVisible(false);
@@ -100,13 +112,21 @@ public class NvLocationController implements Initializable {
                 formAnchorPane.setVisible(true);
                 tvClient.setVisible(false);
                 tvVehicule.setVisible(false);
+                txtClient.setVisible(false);
+                txtVehicule.setVisible(false);
+
             }
         else{
             if(!isEmpty()){//test les champs vides
                 Client c = tvClient.getSelectionModel().selectedItemProperty().get();
                 Vehicule v = tvVehicule.getSelectionModel().selectedItemProperty().get();
-                String dateDeb = txtDateDeb.getText().trim();
-                String dateFin = txtDateFin.getText().trim();
+                //String dateDeb = txtDateDeb.getText().trim();
+                //String dateFin = txtDateFin.getText().trim();
+                LocalDate startdate=DateDeb.getValue();
+                LocalDate endDate=DateFin.getValue();
+                String varstartdate=startdate.toString();
+                String varenddate=endDate.toString();
+
                 int prixTotal=0;
                 int prixAvance=0;
                 try{
@@ -116,7 +136,7 @@ public class NvLocationController implements Initializable {
                     lblAlert.setText("inserer un entier");
                     lblAlert.setVisible(true);
                 }
-                if (new Location(v, c, dateDeb, dateFin, prixTotal, prixAvance).addLocation()) {
+                if (new Location(v, c, varstartdate, varenddate, prixTotal, prixAvance).addLocation()) {
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.close();
                     v.modifierVehicule(Vehicule.ETAT_LOUE);
@@ -141,6 +161,10 @@ public class NvLocationController implements Initializable {
             formAnchorPane.setVisible(false);
             tvClient.setVisible(true);
             tvVehicule.setVisible(true);
+            txtVehicule.setVisible(true);
+            txtClient.setVisible(true);
+            txtConfirmerLocation.setVisible(true);
+
         }else
             try {
                 FXMLLoader fxmlloader = new FXMLLoader();
@@ -207,12 +231,30 @@ public class NvLocationController implements Initializable {
         tvClient.setItems(clients);
     }
 
+    public  void refresh(ActionEvent event) throws SQLException {
+        tvClient.getItems().clear();
+        clients.clear();
+        TableColumn cinCol = new TableColumn<Client, Object>("CIN");
+        cinCol.setCellValueFactory(new PropertyValueFactory<Client, Object>("cin"));
+        TableColumn nomCom = new TableColumn("Nom");
+        nomCom.setCellValueFactory(new PropertyValueFactory("nom"));
+        TableColumn prenomCol = new TableColumn("Prénom");
+        prenomCol.setCellValueFactory(new PropertyValueFactory("prenom"));
+        TableColumn adresseCol = new TableColumn("Adresse");
+        adresseCol.setCellValueFactory(new PropertyValueFactory("adresse"));
 
+        tvClient.getColumns().setAll(cinCol, nomCom , prenomCol , adresseCol);
 
+        ArrayList<Client> listclients = Client.getAll();
+
+        clients.addAll(listclients);
+
+        tvClient.setItems(clients);
+    }
 
 
     private boolean isEmpty(){
-        return txtDateDeb.getText().trim().isEmpty() || txtDateFin.getText().trim().isEmpty()
+        return DateDeb.getValue().equals("") || DateFin.getValue().equals("")
                 || txtPrixAvance.getText().trim().isEmpty() || txtPrixTotal.getText().trim().isEmpty();
     }
     @FXML

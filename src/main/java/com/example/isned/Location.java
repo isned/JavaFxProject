@@ -88,8 +88,6 @@ public class Location  {
 
             Connection con=db.getConnection();
             Statement st = con.createStatement();
-
-
             int rs;
             rs = st.executeUpdate(req);
             if(rs>0)
@@ -97,7 +95,7 @@ public class Location  {
             return true;
         } catch (SQLException ex) {
             if(ex instanceof SQLIntegrityConstraintViolationException) {
-                System.out.println("duplicate entry "+ex.getMessage());
+                System.out.println("déja existe "+ex.getMessage());
                 return false;
             } else
                 Logger.getLogger(Park.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,10 +105,10 @@ public class Location  {
     public void deleteLocation() {
         try {
             db = DatabaseConnection.getInstance();
+            Connection con=db.getConnection();
             String req="DELETE FROM `location` WHERE `immatricule` = "+getV().getImmatricule()
                     +" AND `cin` LIKE "+getC().getCin();
 
-            Connection con=db.getConnection();
             Statement st = con.createStatement();
 
             int rs=st.executeUpdate(req);
@@ -128,16 +126,16 @@ public class Location  {
         try {
             Connection con=db.getConnection();
             Statement st = con.createStatement();
-
             ResultSet rs = st.executeQuery("select * from location");
 
             while(rs.next()){
                 Vehicule v = new Park().getVehByImmat(rs.getInt("immatricule"));
+                //Appel fonction getClientByImmat
                 Client c=Client.getClientByCin(rs.getString("cin"));
                 System.out.println("Client "+ c.toString());
                 Location l = new Location(v, c, rs.getString("datedeb"), rs.getString("datefin"),
                         rs.getInt("prix_total"), rs.getInt("prix_avance"));
-                //System.out.println(l);
+                System.out.println(l);
                 list.add(l);
 
             }

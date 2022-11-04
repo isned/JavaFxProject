@@ -2,8 +2,10 @@ package com.example.isned;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -18,6 +20,7 @@ public class HelloApplication extends Application {
         stage.setTitle("admin");
         stage.setScene(scene);
 
+
         Stage Hello = new Stage();
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("Hello.fxml"));
         Parent root1 = loader.load();
@@ -25,6 +28,15 @@ public class HelloApplication extends Application {
         Hello.initStyle(StageStyle.UNDECORATED);
         Hello.setScene(s);
         Hello.show();
+        //code progressBar
+        /*Group root = new Group();
+        //Scene scene = new Scene(root, 260, 80);
+        stage.setScene(scene);
+        Group g = new Group();
+        ProgressBar p2 = new ProgressBar();
+        g.getChildren().add(p2);
+        scene.setRoot(g);
+        stage.show();*/
 
 
         //public static void main(String[] args) {
@@ -44,7 +56,9 @@ public class HelloApplication extends Application {
                     @Override
                     public void run() {
                         Hello.hide();
+
                         stage.show();
+
                     }
                 });
             }

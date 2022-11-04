@@ -29,8 +29,8 @@ public final class Park {
             ResultSet rs = st.executeQuery("select * from vehicule");
 
             while(rs.next()){
-                Vehicule v = new Vehicule(rs.getInt("immatricule"), rs.getString("constructeur") , rs.getString("marque"), rs.getString("etat"));
-
+                Vehicule v = new Vehicule(rs.getInt("immatricule"), rs.getString("constructeur")
+                        , rs.getString("marque"), rs.getString("etat"));
                 System.out.println(v);
                 vList.add(v);
             }
@@ -40,10 +40,9 @@ public final class Park {
         return vList;
     }
     public Vehicule getVehByImmat(int immat){
-        for(Vehicule v: listeVehicule) {
+        for(Vehicule v: listeVehicule)
             if(v.contain(immat))
                 return v;
-        }
         return null;
     }
 }

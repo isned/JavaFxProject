@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -23,37 +22,13 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import static com.example.isned.Location.getLocationList;
 
 
 public class HelloController implements Initializable {
 
     @FXML
-    private Button testbd;
-
-    @FXML
-    private Label testbdlabel;
-    private String url = "jdbc:mysql://localhost:3306/isned";
-    private String username = "root";
-    private String password = "isnedbelhaj12";
-    private String vartest;
-
-    public void testbdfc(ActionEvent event){
-        try{
-            Connection connection= DriverManager.getConnection(url,username,password);
-            Statement statement=connection.createStatement();
-            ResultSet resultSet=statement.executeQuery("select count(cin) from client");
-            while (resultSet.next()){
-                vartest=resultSet.getString("count(cin)");
-            }
-            testbdlabel.setText(vartest);
-
-        }
-        catch(SQLException e){
-          Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE,null,e);
-        }
-    }
+    private Label txtAjoutVehicule;
     @FXML
     private Button btnEnrregistrer;
 
@@ -91,7 +66,6 @@ public class HelloController implements Initializable {
     @FXML
     private Button btnNewLocation;
 
-
     @FXML
     private ComboBox<String> cBoxClients;
 
@@ -101,8 +75,13 @@ public class HelloController implements Initializable {
     private TableView<Location> tvConsultLocation;
     Park park=new Park();
     ArrayList<Location> locationList;
+
+
     @FXML
     private AnchorPane anchorePaneVehicule;
+
+
+    //ajout d'une nouvelle aquisition
     @FXML
     void Enregistrer(ActionEvent event) {
         int immat;
@@ -115,8 +94,9 @@ public class HelloController implements Initializable {
             marque = txtMarque.getText().trim();
             Vehicule vehicule = new Vehicule(immat, constructeur, marque);
             if(vehicule.AjouterVehicule()){
-                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                stage.close();
+                //Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                //stage.close();
+
             }
             else{
                 lblAlert.setText("erreur de connexion");
@@ -128,11 +108,15 @@ public class HelloController implements Initializable {
             lblAlert.setVisible(true);
         }
     }
+
+    //vider les champs pour ajouter nouvelle aquisition
     @FXML
     void close(ActionEvent event) {
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.close();
+        txtConstructeur.setText("");
+        txtImmat.setText("");
+        txtMarque.setText("");
     }
+    //tester si les champs sont vides au non au niveau d'ajout une nouvelle aquisition
     private boolean isEmpty(){
         return txtConstructeur.getText().trim().isEmpty() || txtImmat.getText().trim().isEmpty()
                 || txtMarque.getText().trim().isEmpty();
@@ -196,10 +180,8 @@ public class HelloController implements Initializable {
     }
 
 
-
-
     @FXML
-    void finLocation(ActionEvent event) throws SQLException {
+    void finLocation(ActionEvent event)  {
         Location location = tvConsultLocation.getSelectionModel().selectedItemProperty().get();
         location.deleteLocation();
         location.getV().modifierVehicule(Vehicule.ETAT_DISPONIBLE);
@@ -217,6 +199,7 @@ public class HelloController implements Initializable {
             Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tvConsult.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -309,14 +292,15 @@ public class HelloController implements Initializable {
             Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ArrayList<String> list = new ArrayList<>();
-        for(Client cin : listClient)
+        for(Client cin : listClient )
             list.add(cin.toString());
         cBoxClients.getItems().setAll(list);
+        
     }
 
 
 
-    private void repaintVehiculesTable() throws SQLException {
+    private void repaintVehiculesTable()  {
         tvConsult.getItems().clear();
         try {
             SetVehicules();
@@ -324,8 +308,6 @@ public class HelloController implements Initializable {
             Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-
 
     @FXML
     void deconnecter(ActionEvent event) throws IOException {

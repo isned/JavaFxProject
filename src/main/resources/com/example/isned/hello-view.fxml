@@ -20,55 +20,52 @@
 
 <AnchorPane id="AnchorPane" prefHeight="478.0" prefWidth="857.0" style="-fx-background-color: #CCDBF2;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.isned.HelloController">
     <children>
-        <TabPane layoutX="-2.0" prefHeight="400.0" prefWidth="863.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutX="-1.0" layoutY="24.0" prefHeight="390.0" prefWidth="863.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Gestion Park de l'agence">
                     <content>
                         <SplitPane dividerPositions="0.3089887640449438" prefHeight="160.0" prefWidth="200.0">
                             <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #5F6670;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #5c7b80;">
                                     <children>
-                                        <Button fx:id="btnNvAcquisition" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" onAction="#ajouterVehicule" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #5A78A6;" text="Nouvelle acquisition" textFill="WHITE">
+                                        <Button fx:id="btnNvAcquisition" layoutX="32.0" layoutY="34.0" mnemonicParsing="false" onAction="#ajouterVehicule" prefHeight="63.0" prefWidth="180.0" style="-fx-background-color: #4287f5;" text="Nouvelle acquisition" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                             <font>
-                                                <Font name="Raleway SemiBold" size="12.0" />
+                                                <Font size="16.0" />
                                             </font></Button>
-                                        <Button fx:id="btnModifVehicule" disable="true" layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#modifierEtat" prefWidth="180.0" style="-fx-background-color: #5A78A6;" text="Mettre en réparation" textFill="WHITE">
+                                        <Button fx:id="btnModifVehicule" disable="true" layoutX="32.0" layoutY="114.0" mnemonicParsing="false" onAction="#modifierEtat" prefHeight="67.0" prefWidth="180.0" style="-fx-background-color: #4287f5;" text="Mettre en réparation" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                             <font>
-                                                <Font name="Raleway SemiBold" size="12.0" />
+                                                <Font size="16.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="btnSuppVehicule" disable="true" layoutX="14.0" layoutY="120.0" mnemonicParsing="false" onAction="#supprimerVehicule" prefWidth="180.0" style="-fx-background-color: #5A78A6;" text="Suppression d’un véhicule" textFill="WHITE">
+                                        <Button fx:id="btnSuppVehicule" disable="true" layoutX="32.0" layoutY="195.0" mnemonicParsing="false" onAction="#supprimerVehicule" prefHeight="72.0" prefWidth="180.0" style="-fx-background-color: #4287f5;" text="Suppression d’un véhicule" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                             <font>
-                                                <Font name="Raleway SemiBold" size="12.0" />
+                                                <Font size="13.0" />
                                             </font></Button>
-                                        <Button layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onAction="#ConsultationPark" prefWidth="180.0" style="-fx-background-color: #5A78A6;" text="Consultation parc" textFill="WHITE">
+                                        <Button layoutX="32.0" layoutY="284.0" mnemonicParsing="false" onAction="#ConsultationPark" prefHeight="68.0" prefWidth="180.0" style="-fx-background-color: #4287f5;" text="Consultation parc" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor><font>
-                                            <Font name="Raleway SemiBold" size="12.0" />
+                                            <Font size="17.0" />
                                         </font></Button>
-                              <Button fx:id="testbd" layoutX="78.0" layoutY="262.0" mnemonicParsing="false" onAction="#testbdfc" text="Button" />
-                              <Label fx:id="testbdlabel" layoutX="84.0" layoutY="231.0" text="Label" />
-                              <Button fx:id="boutonDeconncter" layoutX="122.0" layoutY="332.0" mnemonicParsing="false" onAction="#deconnecter" text="deconnecter" />
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="593.0" style="-fx-background-color: #CCDBF2;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="356.0" prefWidth="586.0" style="-fx-background-color: #CCDBF2;">
                                     <children>
                                         <TableView fx:id="tvConsult" prefHeight="371.0" prefWidth="595.0" style="-fx-background-color: #CCDBF2;" visible="false" />
-                              <AnchorPane id="AnchorPane" fx:id="anchorePaneVehicule" layoutX="7.0" layoutY="7.0" prefHeight="357.0" prefWidth="512.0" visible="false">
+                              <AnchorPane id="AnchorPane" fx:id="anchorePaneVehicule" layoutX="34.0" layoutY="7.0" prefHeight="348.0" prefWidth="485.0" visible="false">
                                  <children>
-                                    <BorderPane prefHeight="214.0" prefWidth="364.0" style="-fx-background-color: #CCDBF2;">
+                                    <BorderPane layoutX="16.0" layoutY="67.0" prefHeight="255.0" prefWidth="469.0" style="-fx-background-color: #CCDBF2;">
                                        <center>
-                                          <GridPane style="-fx-background-color: #CCDBF2;" BorderPane.alignment="CENTER">
+                                          <GridPane prefHeight="175.0" prefWidth="438.0" style="-fx-background-color: #CCDBF2;" BorderPane.alignment="CENTER">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="111.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="253.0" />
@@ -79,16 +76,22 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Label text="Immatricule" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                <Label text="Immatricule" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></Label>
                                                 <Label text="Constructeur" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                                    <font>
-                                                      <Font name="Raleway" size="12.0" />
+                                                      <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="Marque" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                                <TextField fx:id="txtImmat" GridPane.columnIndex="1" />
-                                                <TextField fx:id="txtMarque" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="txtConstructeur" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Marque" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></Label>
+                                                <TextField fx:id="txtImmat" prefHeight="31.0" prefWidth="253.0" GridPane.columnIndex="1" />
+                                                <TextField fx:id="txtMarque" prefHeight="30.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <TextField fx:id="txtConstructeur" prefHeight="31.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
                                           </GridPane>
                                        </center>
@@ -100,22 +103,27 @@
                                           </Label>
                                        </top>
                                        <bottom>
-                                          <ButtonBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #5F6670;" BorderPane.alignment="CENTER">
+                                          <ButtonBar prefHeight="60.0" prefWidth="444.0" style="-fx-background-color: #5F6670;" BorderPane.alignment="CENTER">
                                              <buttons>
-                                                <Button fx:id="btnEnrregistrer" mnemonicParsing="false" onAction="#Enregistrer" style="-fx-background-color: #5A78A6;" text="Enrregistrer" textFill="WHITE">
+                                                <Button fx:id="btnEnrregistrer" minWidth="0.0" mnemonicParsing="false" onAction="#Enregistrer" prefHeight="26.0" prefWidth="336.0" style="-fx-background-color: #5A78A6;" text="Enrregistrer" textFill="WHITE">
                                                    <font>
-                                                      <Font name="Raleway" size="12.0" />
+                                                      <Font size="15.0" />
                                                    </font>
                                                 </Button>
-                                                <Button cancelButton="true" mnemonicParsing="false" onAction="#close" style="-fx-background-color: #5A78A6;" text="Annuler" textFill="WHITE">
+                                                <Button cancelButton="true" minWidth="7.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" style="-fx-background-color: #5A78A6;" text="Annuler" textFill="WHITE">
                                                    <font>
-                                                      <Font name="Raleway" size="12.0" />
+                                                      <Font size="16.0" />
                                                    </font>
                                                 </Button>
                                              </buttons>
                                           </ButtonBar>
                                        </bottom>
                                     </BorderPane>
+                                    <Label fx:id="txtAjoutVehicule" layoutX="162.0" layoutY="25.0" text="Ajouter une véhicule" textFill="#4a1cb5">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                                     </children></AnchorPane>
@@ -126,37 +134,37 @@
                     <content>
                         <SplitPane dividerPositions="0.4020857473928158" prefHeight="160.0" prefWidth="200.0">
                             <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #5F6670;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #5c7b80;">
                                     <children>
-                                        <Button fx:id="btnNewLocation" layoutX="12.0" layoutY="43.0" mnemonicParsing="false" onAction="#AjoutLocation" prefWidth="320.0" style="-fx-background-color: #5A78A6;" text="Nouvelle location" textFill="WHITE">
+                                        <Button fx:id="btnNewLocation" layoutX="12.0" layoutY="22.0" mnemonicParsing="false" onAction="#AjoutLocation" prefHeight="45.0" prefWidth="320.0" style="-fx-background-color: #4287f5;" text="Nouvelle location" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                             <font>
-                                                <Font name="Raleway SemiBold" size="12.0" />
+                                                <Font size="16.0" />
                                             </font></Button>
-                                        <Button fx:id="btnFinLocation" disable="true" layoutX="12.0" layoutY="81.0" mnemonicParsing="false" onAction="#finLocation" prefWidth="320.0" style="-fx-background-color: #5A78A6;" text="Fin de location" textFill="WHITE">
+                                        <Button fx:id="btnFinLocation" disable="true" layoutX="12.0" layoutY="78.0" mnemonicParsing="false" onAction="#finLocation" prefHeight="45.0" prefWidth="320.0" style="-fx-background-color: #4287f5;" text="Fin de location" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                             <font>
-                                                <Font name="Raleway SemiBold" size="12.0" />
+                                                <Font size="16.0" />
                                             </font></Button>
-                                        <Button fx:id="btnConsultLocation" layoutX="12.0" layoutY="121.0" mnemonicParsing="false" onAction="#getVehiculeLoue" prefWidth="320.0" style="-fx-background-color: #5A78A6;" text="Consultation des véhicules actuellement loués" textFill="WHITE">
+                                        <Button fx:id="btnConsultLocation" layoutX="12.0" layoutY="132.0" mnemonicParsing="false" onAction="#getVehiculeLoue" prefHeight="47.0" prefWidth="320.0" style="-fx-background-color: #4287f5;" text="Consultation des véhicules actuellement loués" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                             <font>
-                                                <Font name="Raleway SemiBold" size="13.0" />
+                                                <Font size="14.0" />
                                             </font></Button>
-                                        <Button fx:id="btnConsultByClient" layoutX="12.0" layoutY="161.0" mnemonicParsing="false" onAction="#getVehiculeLoueByClient" prefHeight="25.0" prefWidth="320.0" style="-fx-background-color: #5A78A6;" text="Consultation des véhicules loués par un client" textFill="WHITE">
+                                        <Button fx:id="btnConsultByClient" layoutX="12.0" layoutY="193.0" mnemonicParsing="false" onAction="#getVehiculeLoueByClient" prefHeight="54.0" prefWidth="320.0" style="-fx-background-color: #4287f5;" text="Consultation des véhicules loués par un client" textFill="WHITE">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                             <font>
-                                                <Font name="Raleway SemiBold" size="12.0" />
+                                                <Font size="14.0" />
                                             </font></Button>
-                                        <ComboBox fx:id="cBoxClients" layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="164.0" promptText="Selectionner un client" visible="false" />
+                                        <ComboBox fx:id="cBoxClients" layoutX="14.0" layoutY="259.0" prefHeight="25.0" prefWidth="164.0" promptText="Selectionner un client" visible="false" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -168,9 +176,13 @@
                     </content></Tab>
             </tabs>
         </TabPane>
-      <Button fx:id="buttonSortir" layoutX="795.0" layoutY="425.0" mnemonicParsing="false" onAction="#sortir" text="X" textFill="#eb2727">
+      <Button fx:id="boutonDeconncter" layoutX="713.0" layoutY="425.0" mnemonicParsing="false" onAction="#deconnecter" prefHeight="39.0" prefWidth="135.0" style="-fx-background-color: #4287f5;" text="Déconnecter" textFill="#f5f5f5">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Button fx:id="buttonSortir" layoutX="837.0" mnemonicParsing="false" onAction="#sortir" prefHeight="18.0" prefWidth="23.0" text="X" textFill="#eb2727">
+         <font>
+            <Font size="10.0" />
          </font>
       </Button>
     </children>

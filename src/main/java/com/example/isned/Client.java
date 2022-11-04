@@ -1,5 +1,5 @@
 package com.example.isned;
-
+import static com.example.isned.Location.db;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 public class Client {
     private String cin;
@@ -74,7 +75,7 @@ public class Client {
             return true;
         } catch (SQLException ex) {
             if(ex instanceof SQLIntegrityConstraintViolationException) {
-                System.out.println("duplicate entry");
+                System.out.println("client déja existe");
             } else
                 Logger.getLogger(Park.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -82,7 +83,7 @@ public class Client {
     }
     public static ArrayList<Client> getAll() throws SQLException{
         ArrayList<Client> list = new ArrayList<>();
-        DatabaseConnection db = DatabaseConnection.getInstance();
+        db = DatabaseConnection.getInstance();
         try {
             Connection con=db.getConnection();
             Statement st = con.createStatement();

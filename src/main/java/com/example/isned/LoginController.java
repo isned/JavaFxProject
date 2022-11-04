@@ -8,15 +8,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
+import java.sql.*;
+import java.sql.SQLException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-
+    @FXML
+    private Button btnInscrire;
     @FXML
     private CheckBox checkBox;
     @FXML
@@ -30,6 +37,9 @@ public class LoginController {
     @FXML
     private Button annumBtn;
 
+
+
+
     @FXML
     private TextField loginTfd;
     @FXML
@@ -40,32 +50,56 @@ public class LoginController {
 
 
 
-    public void login(ActionEvent event) throws IOException {
-        if(loginTfd.getText().toString().equals("admin") && mdpTfd.getText().toString().equals("admin")){
-            root = FXMLLoader.load(Objects.requireNonNull((getClass()).getResource("hello-view.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } else if (loginTfd.getText().isEmpty() && mdpTfd.getText().isEmpty()) {
+    public void login(ActionEvent event) throws IOException, SQLException {
+        if(!loginTfd.getText().isBlank() && !mdpTfd.getText().isBlank()){
+            validloginadmin();
+        }else{
             wronginfo.setText("svp donner vos infos");
         }
-        else {
-            wronginfo.setText("login ou mdp incorrecte");
+
+    }
+
+    private void validloginadmin() throws SQLException {
+        DatabaseConnection db =DatabaseConnection.getInstance(); ;
+        
+        Connection con=db.getConnection();
+        String req="select count(1) from Admin where login='"+loginTfd.getText()+"' and mdp='"+mdpTfd.getText()+"'";
+
+        try {
+            Statement st = con.createStatement();
+            ResultSet queryResult = st.executeQuery(req);
+            while (queryResult.next()) {
+                if (queryResult.getInt(1) == 1) {
+                   methoadmin();
+                } else {
+                    wronginfo.setText("invalide login ");
+                }
+            }
+            } catch(SQLException ex){
+                Logger.getLogger(Park.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+        }
+
+     public void methoadmin( ) {
+        try{
+            Parent root = FXMLLoader.load(Objects.requireNonNull((getClass()).getResource("hello-view.fxml")));
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            Scene scene = new Scene(root);
+            stage.setScene( scene);
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
         }
     }
 
 
+    //on clique sur mdp oublié puis l'affichage de  l'interface mdp-login
 
-   @FXML
-   void MotDePasse(ActionEvent event) throws IOException {
 
-       root = FXMLLoader.load((getClass()).getResource("mdp-login.fxml"));
-       stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-       scene = new Scene(root);
-       stage.setScene(scene);
-       stage.show();
-   }
+   //vider les champs de login et mdp
     @FXML
     void annulerChamps(ActionEvent event) {
         loginTfd.setText("");
@@ -76,6 +110,9 @@ public class LoginController {
     void sortir(ActionEvent event) {
         Platform.exit();
     }
+
+
+    //affichier le mot de passe
     @FXML
     void changeVisibilite(ActionEvent event) {
        if (checkBox.isSelected()){
@@ -88,5 +125,21 @@ public class LoginController {
        mdpTfd.setVisible(true);
        passwordText.setVisible(false);
     }
+    @FXML
+    void sinscrire(ActionEvent event) throws IOException {
 
+        root = FXMLLoader.load((getClass()).getResource("inscrire.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    void MotDePasse(ActionEvent event) throws IOException {
+        root = FXMLLoader.load((getClass()).getResource("mdp-login.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
