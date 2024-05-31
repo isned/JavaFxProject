@@ -7,6 +7,7 @@ Cette application permet aux utilisateurs de réserver des voitures, de consulte
 clients et des véhicules.
 
 Fonctionnalités:
+
 *)Authentification des utilisateurs:
 Connexion et inscription des utilisateurs (clients et administrateurs).
 
