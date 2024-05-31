@@ -1,5 +1,7 @@
 JavaFX Car Rental Application
+
 Description:
+
 Le projet "Car Rental" est une application de location de voitures développée en Java en utilisant JavaFX pour l'interface utilisateur. 
 Cette application permet aux utilisateurs de réserver des voitures, de consulter les disponibilités et de gérer les informations des 
 clients et des véhicules.
